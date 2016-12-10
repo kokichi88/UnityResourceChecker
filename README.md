@@ -1,5 +1,5 @@
 # UnityResourceChecker
-This's small tool I write to my project to help me easier to track assets depenedencies.
+This's small tool I write for my project to help me easier to track assets depenedencies.
 It's useful when you have a lot of particles, materials, textures linked with each other and you're afraid of removing any assets will affect others.
 
 Requirement:
@@ -7,7 +7,7 @@ Requirement:
 - Why i use python ?
  -> Python deals with string and files much better than Unity does.
  
-How to use
+How to use:
 - Right Click -> Select texture -> FindMaterialsAndPrefabsByTexture
 - Right Click -> Select material -> FindPrefabsByMaterial
 - Output format is json.
