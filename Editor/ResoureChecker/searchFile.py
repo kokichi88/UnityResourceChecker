@@ -50,24 +50,22 @@ def findDependenciesWithManyLevels(searchName, dependList, workingDir):
 		if(count == 0):
 			childNames.append(searchName)
 		else:
-			childNames += ret[dependList[count]]
+			childNames += ret[dependList[count][1:]]
 
 		parentId = count + 1
 		paths = []
 		foundParent  = []
 		for childName  in childNames :
-			metaChildPattern = r'^' + childName + metaExt
+			childPath = childName + metaExt
 			parentPattern = r'.*' + dependList[parentId] + r'$'
-			childFiles = findFiles(fileNameFilter, metaChildPattern, workingDir)
-			if len(childFiles) > 0 :
-				path = childFiles[0]
-				guid = getGUID(path)
-				paths += findFiles(fileNameFilter, parentPattern, workingDir)
+			if os.path.isfile(childPath) > 0 :
+				guid = getGUID(childPath)
+				paths = findFiles(fileNameFilter, parentPattern, workingDir)
 				foundParent += searchInFiles(guid, paths)
 		pass
 		count += 1
 
-		ret[dependList[parentId]] = foundParent
+		ret[dependList[parentId][1:]] = foundParent
 	return ret
 
 def main() :

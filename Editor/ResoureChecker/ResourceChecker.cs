@@ -8,9 +8,10 @@ public class ResourceChecker {
 	static string GetAssetName(Object obj)
 	{
 		string assetPath = AssetDatabase.GetAssetPath(obj);
-		string[] assetNames = assetPath.Split(new char[]{'/'});
-		string assetName = assetNames[assetNames.Length-1];
-		return assetName;
+		int index = Application.dataPath.IndexOf("/Assets");
+		string path = Application.dataPath.Substring(0, index+1);
+		string ret = "\"" + path + assetPath + "\"";
+		return ret;
 	}
 
 	[MenuItem("Assets/FindPrefabsByMaterial")]
@@ -27,7 +28,7 @@ public class ResourceChecker {
 
 	static void Find(string assetName, string type)
 	{
-		string workingDir = Application.dataPath + "/Resources/";
+		string workingDir = "\"" + Application.dataPath + "/Resources/" + "\"";
 		Process p = new Process();
 		p.StartInfo.WorkingDirectory = Application.dataPath + "/Editor/ResoureChecker/";
 		p.StartInfo.UseShellExecute = false;
